@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "914878291317",
+    "project_id": "kotlin-firebase-chatting",
+    "storage_bucket": "kotlin-firebase-chatting.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:914878291317:android:2038d1ea01a9ff1288073c",
+        "android_client_info": {
+          "package_name": "com.example.kotlin_firebase_chatting"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "914878291317-6go4eb54rbu178s7bops4u4bk6r9lu5o.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAbaYF-tgHdJwXaktns7rFeHyotDBowxes"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "914878291317-6go4eb54rbu178s7bops4u4bk6r9lu5o.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
