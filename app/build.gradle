@@ -55,10 +55,5 @@ dependencies {
     implementation 'com.google.firebase:firebase-database-ktx'
 
     //groupie android
-    def groupie_version = "2.9.0"
-//    implementation "com.github.lisawray.groupie:groupie:$groupie_version"
-//    implementation "com.github.lisawray.groupie:groupie-viewbinding:$groupie_version"
-    implementation "com.xwray:groupie:$groupie_version"
-    implementation "com.xwray:groupie-kotlin-android-extensions:$groupie_version"
-    implementation ("io.coil-kt:coil:0.11.0")
+    implementation 'com.github.lisawray.groupie:groupie:2.10.1'
 }
