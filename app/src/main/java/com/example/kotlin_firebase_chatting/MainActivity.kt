@@ -31,7 +31,7 @@ class MainActivity : AppCompatActivity() {
                     if (task.isSuccessful) {
                         Log.d(TAG,"createUserWithEmail:success")
 
-                        val uid = auth.currentUser.toString()
+                        val uid = auth.uid.toString()
                         val user = User(uid,userName_area.text.toString())
                        //데이터베이스 넣음
                         val db = Firebase.firestore.collection("users")
@@ -43,7 +43,7 @@ class MainActivity : AppCompatActivity() {
                             .addOnFailureListener {
                                 Log.w(TAG,"데이터베이스 실패",task.exception)
                             }
-                        val intent = Intent(this,ChatListActivity::class.java)
+                        val intent = Intent(this, ChatListActivity::class.java)
                         intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
                         startActivity(intent)
 

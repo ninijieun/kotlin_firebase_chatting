@@ -29,9 +29,7 @@ class loginActivity : AppCompatActivity() {
                             // Sign in success, update UI with the signed-in user's information
                             Log.d(TAG, "signInWithEmail:success")
 
-                            //데이터베이스의 User정보 저장.
-
-                            val intent = Intent(this,ChatListActivity::class.java)
+                            val intent = Intent(this, ChatListActivity::class.java)
                             intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
                             startActivity(intent)
 
