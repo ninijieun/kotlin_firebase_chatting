@@ -3,8 +3,6 @@ package com.example.kotlin_firebase_chatting
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
-import android.widget.EditText
-import com.example.kotlin_firebase_chatting.Model.ChatModel
 import com.example.kotlin_firebase_chatting.Model.ChatNewModel
 import com.example.kotlin_firebase_chatting.adapter.ChatLeftYou
 import com.example.kotlin_firebase_chatting.adapter.ChatRightMe
@@ -18,16 +16,17 @@ import com.google.firebase.firestore.ktx.firestore
 import com.google.firebase.ktx.Firebase
 import com.xwray.groupie.GroupieAdapter
 import kotlinx.android.synthetic.main.activity_chat_room.*
-
+/* 채팅룸 : 사용자간의 실시간 채팅을 위한 서비스단*/
 class ChatRoomActivity : AppCompatActivity() {
-    private lateinit var auth: FirebaseAuth
 
+    private lateinit var auth: FirebaseAuth
     private val TAG:String=ChatRoomActivity::class.java.simpleName
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_chat_room)
 
+        //Firebase연동
         auth = Firebase.auth
 
         val myUid = auth.uid
@@ -106,6 +105,8 @@ class ChatRoomActivity : AppCompatActivity() {
         }
         readRef.addChildEventListener(childEventListener)
 
+        val myRef_list = database.getReference("message-user-list")
+
         button.setOnClickListener {
             //real database쓰기
             val message = editTextTextPersonName.text.toString()
@@ -117,6 +118,9 @@ class ChatRoomActivity : AppCompatActivity() {
             //받는사람 data
             val getChat = ChatNewModel(youUid, myUid.toString(), message, System.currentTimeMillis(),"you")
             myRef.child(youUid).child(myUid.toString()).push().setValue(getChat)
+
+            //real database 업데이트
+            myRef_list.child(myUid.toString()).child(youUid).setValue(sendChat)
         }
 //         firebase database store 쓰기
         //            val message = editTextTextPersonName.text.toString()
