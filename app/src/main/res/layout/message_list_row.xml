@@ -4,21 +4,23 @@
     android:orientation="horizontal"
     android:layout_width="match_parent"
     android:background="@drawable/round"
+    android:layout_margin="6dp"
     android:layout_height="65dp">
 
     <TextView
         android:id="@+id/name"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_margin="20dp"
-        android:textStyle="bold"
-        android:text="name"/>
+        android:layout_marginTop="20dp"
+        android:layout_marginLeft="60dp"
+        android:text="name"
+        android:textStyle="bold" />
 
     <TextView
         android:id="@+id/msg"
-        android:layout_width="105dp"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_margin="20dp"
-        android:text="message" />
+        android:text="상태 메세지" />
 
 </LinearLayout>

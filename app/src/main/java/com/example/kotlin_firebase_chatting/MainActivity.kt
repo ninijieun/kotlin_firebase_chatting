@@ -4,12 +4,11 @@ import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
-import com.example.kotlin_firebase_chatting.Model.User
 import com.google.firebase.auth.FirebaseAuth
-import com.google.firebase.auth.ktx.auth
-import com.google.firebase.firestore.ktx.firestore
-import com.google.firebase.ktx.Firebase
 import kotlinx.android.synthetic.main.activity_main.*
+import kotlinx.android.synthetic.main.activity_main.login_Button
+import kotlinx.android.synthetic.main.activity_main.login_email
+import kotlinx.android.synthetic.main.activity_main.login_pwd
 
 class MainActivity : AppCompatActivity() {
     private lateinit var auth: FirebaseAuth
@@ -19,46 +18,37 @@ class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
+        auth = FirebaseAuth.getInstance()
 
-        auth = Firebase.auth
+        try{
+            login_Button.setOnClickListener {
+                val email = login_email.text.toString()
+                val pwd = login_pwd.text.toString()
 
-        join_button.setOnClickListener {
-            val email = email_area.text.toString()
-            val pwd = password_area.text.toString()
+                auth.signInWithEmailAndPassword(email, pwd)
+                    .addOnCompleteListener(this) { task ->
+                        if (task.isSuccessful) {
+                            Log.d(TAG, "signInWithEmail:success")
 
-            auth.createUserWithEmailAndPassword(email, pwd)
-                .addOnCompleteListener(this) { task ->
-                    if (task.isSuccessful) {
-                        Log.d(TAG,"createUserWithEmail:success")
+                            val intent = Intent(this, FriendsListActivity::class.java)
+                            intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
+                            startActivity(intent)
 
-                        val uid = auth.uid.toString()
-                        val user = User(uid,userName_area.text.toString())
-                       //데이터베이스 넣음
-                        val db = Firebase.firestore.collection("users")
-                        db.document(auth.uid.toString())
-                            .set(user)
-                            .addOnSuccessListener{
-                                Log.d(TAG,"데이터베이스 성공")
-                            }
-                            .addOnFailureListener {
-                                Log.w(TAG,"데이터베이스 실패",task.exception)
-                            }
-                        val intent = Intent(this, ChatListActivity::class.java)
-                        intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
-                        startActivity(intent)
+                        } else {
+                            Log.w(TAG, "signInWithEmail:failure", task.exception)
 
-                    } else {
-                        Log.w(TAG,"createUserWithEmail:failure", task.exception)
-                        print(pwd)
+                        }
                     }
-                }
+            }
+        }catch (e:Exception){
+            Log.d(TAG,e.toString())
         }
 
-
-        login_button_main.setOnClickListener {
-            val intent = Intent(this,loginActivity::class.java)
+        join_button_main.setOnClickListener {
+            val intent = Intent(this,JoinActivity::class.java)
             startActivity(intent)
         }
+
     }
 
 
